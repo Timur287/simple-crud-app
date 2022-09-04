@@ -3,7 +3,7 @@ package com.example.simplecrudapp.controller;
 import com.example.simplecrudapp.SimpleCrudAppApplication;
 import com.example.simplecrudapp.entity.Student;
 import com.example.simplecrudapp.service.StudentService;
-import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,11 +14,13 @@ import java.util.logging.Logger;
 @RestController
 //@AllArgsConstructor
 @RequestMapping("/students")
+@Log4j2
 public class StudentController {
 
     @Autowired
     private StudentService service;
-    private static final Logger LOG = Logger.getLogger(SimpleCrudAppApplication.class.getName());
+
+    //private static final Logger LOG = Logger.getLogger(SimpleCrudAppApplication.class.getName());
 
     @PostMapping
     public Student saveStudent(@RequestBody Student student){
@@ -27,7 +29,7 @@ public class StudentController {
 
     @GetMapping
     public List<Student> getStudents(){
-        LOG.log(Level.INFO, "Index API is calling");
+        log.info("Index API is calling");
         return service.getStudents();
     }
 
